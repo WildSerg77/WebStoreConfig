@@ -1,0 +1,70 @@
+webstore:
+  services:
+    catalogue:
+      uri: lb://webstore-catalogue-service
+    feedback:
+      uri: lb://webstore-feedback-service
+spring:
+  boot:
+    admin:
+      client:
+#        url: http://localhost:8085
+#        instance:
+#          name: customer-app
+#          service-host-type: ip
+        enabled: false
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://172.29.64.1:8082/realms/webstore
+            user-name-attribute: preferred_username
+        registration:
+          keycloak:
+            client-id: customer-app
+            client-secret: x9cJF7PvZXeO7QH9LkUlPhskOjQScQrs
+            authorization-grant-type: authorization_code
+            scope:
+              - openid
+              - view_catalogue
+          metrics:
+            provider: keycloak
+            client-id: customer-app
+            client-secret: x9cJF7PvZXeO7QH9LkUlPhskOjQScQrs
+            authorization-grant-type: client_credentials
+            scope:
+              - metrics_server
+          discovery:
+            provider: keycloak
+            client-id: customer-app
+            client-secret: x9cJF7PvZXeO7QH9LkUlPhskOjQScQrs
+            authorization-grant-type: client_credentials
+            scope:
+              - discovery
+      resourceserver:
+        jwt:
+          issuer-uri: http://172.29.64.1:8082/realms/webstore
+management:
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  zipkin:
+    tracing:
+      endpoint: http://172.29.64.1:9411/api/v2/spans
+  tracing:
+    sampling:
+      probability: 1.0
+# 100% собираемых трассировок. На практике так делать не нужно, от 10 до 40% нормальные значения (от 0.1 до 0.4)
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://172.29.64.1:8761/eureka/

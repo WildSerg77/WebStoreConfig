@@ -1,0 +1,25 @@
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            user-name-attribute: preferred_username
+            issuer-uri: http://172.29.64.1:8082/realms/webstore
+        registration:
+          keycloak:
+            client-id: eureka-server
+            client-secret: 9fXlDjY2si2prs0S3BzegKmKuJh8vu5L
+            scope:
+              - openid
+      resourceserver:
+        jwt:
+          issuer-uri: http://172.29.64.1:8082/realms/webstore

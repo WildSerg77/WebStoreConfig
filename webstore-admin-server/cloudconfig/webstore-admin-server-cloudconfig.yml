@@ -1,0 +1,45 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://172.29.64.1:8082/realms/webstore
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://172.29.64.1:8082/realms/webstore
+        registration:
+          keycloak:
+            authorization-grant-type: client_credentials
+            scope:
+              - metrics
+            client-id: admin-service
+            client-secret: h8PTxflNyYECL8xSlJZzHRfjJHX9V97l
+          login:
+            provider: keycloak
+            scope:
+              - metrics
+              - openid
+            client-id: admin-service
+            client-secret: h8PTxflNyYECL8xSlJZzHRfjJHX9V97l
+          discovery:
+            provider: keycloak
+            scope:
+              - discovery
+            client-id: admin-service
+            client-secret: h8PTxflNyYECL8xSlJZzHRfjJHX9V97l
+            authorization-grant-type: client_credentials
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - prometheus
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://172.29.64.1:8761/eureka/
+    register-with-eureka: false
