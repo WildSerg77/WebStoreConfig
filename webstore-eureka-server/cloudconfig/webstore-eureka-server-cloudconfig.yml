@@ -1,7 +1,10 @@
 eureka:
   instance:
-    hostname: localhost
+    hostname: 172.29.64.1
+    leaseRenewallIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 1
   client:
+    registerFetchIntervalSeconds: 1
     register-with-eureka: false
     fetch-registry: false
     service-url:

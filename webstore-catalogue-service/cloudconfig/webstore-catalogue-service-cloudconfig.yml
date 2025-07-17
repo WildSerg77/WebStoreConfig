@@ -27,7 +27,7 @@ spring:
           keycloak:
             issuer-uri: http://172.29.64.1:8082/realms/webstore
   datasource:
-    url: jdbc:postgresql://localhost:5432/catalogue
+    url: jdbc:postgresql://catalogue-db:5432/catalogue
     username: catalogue
     password: catalogue
   flyway:
@@ -45,7 +45,7 @@ springdoc:
       client-id: catalogue-service-swagger-ui
       use-pkce-with-authorization-code-grant: true
 keycloak:
-  uri: http://localhost:8082
+  uri: http://172.29.64.1:8082
 management:
   health:
     livenessstate:
@@ -65,7 +65,10 @@ management:
 # 100% собираемых трассировок. На практике так делать не нужно, от 10 до 40% нормальные значения (от 0.1 до 0.4)
 eureka:
   instance:
+    leaseRenewallIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 1
     prefer-ip-address: true
   client:
+    registerFetchIntervalSeconds: 1
     service-url:
       defaultZone: http://172.29.64.1:8761/eureka/

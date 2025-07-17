@@ -8,10 +8,6 @@ spring:
   boot:
     admin:
       client:
-#        url: http://localhost:8085
-#        instance:
-#          name: customer-app
-#          service-host-type: ip
         enabled: false
   security:
     oauth2:
@@ -64,7 +60,10 @@ management:
 # 100% собираемых трассировок. На практике так делать не нужно, от 10 до 40% нормальные значения (от 0.1 до 0.4)
 eureka:
   instance:
+    leaseRenewallIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 1
     prefer-ip-address: true
   client:
+    registryFetchIntervalSeconds: 1
     service-url:
       defaultZone: http://172.29.64.1:8761/eureka/

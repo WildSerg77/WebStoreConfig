@@ -2,14 +2,10 @@ spring:
   boot:
     admin:
       client:
-#        url: http://localhost:8085
-#        instance:
-#          name: feedback-service
-#          service-host-type: ip
         enabled: false
   data:
     mongodb:
-      uri: mongodb://localhost:27017/feedback
+      uri: mongodb://172.29.64.1:27017/feedback
   security:
     oauth2:
       resourceserver:
@@ -39,7 +35,7 @@ springdoc:
       client-id: feedback-service-swagger-ui
       use-pkce-with-authorization-code-grant: true
 keycloak:
-  uri: http://localhost:8082
+  uri: http://172.29.64.1:8082
 management:
   health:
     livenessstate:
@@ -59,7 +55,10 @@ management:
 # 100% собираемых трассировок. На практике так делать не нужно, от 10 до 40% нормальные значения (от 0.1 до 0.4)
 eureka:
   instance:
+    leaseRenewallIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 1
     prefer-ip-address: true
   client:
+    registerFetchIntervalSeconds: 1
     service-url:
       defaultZone: http://172.29.64.1:8761/eureka/
