@@ -27,7 +27,7 @@ spring:
           keycloak:
             issuer-uri: http://172.29.64.1:8082/realms/webstore
   datasource:
-    url: jdbc:postgresql://catalogue-db:5432/catalogue
+    url: jdbc:postgresql://172.29.64.1:5432/catalogue
     username: catalogue
     password: catalogue
   flyway:
