@@ -57,7 +57,7 @@ eureka:
   instance:
     leaseRenewallIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 1
-    hostname: 172.29.64.1
+    prefer-ip-address: true
   client:
     registerFetchIntervalSeconds: 1
     service-url:

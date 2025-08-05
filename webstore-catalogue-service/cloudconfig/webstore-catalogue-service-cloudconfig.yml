@@ -3,6 +3,16 @@ spring:
     admin:
       client:
         enabled: false
+  datasource:
+    url: jdbc:postgresql://172.29.64.1:5432/catalogue
+    username: catalogue
+    password: catalogue
+  flyway:
+    schemas:
+      - public
+      - catalogue
+  jpa:
+    show-sql: true
   security:
     oauth2:
       resourceserver:
@@ -26,16 +36,6 @@ spring:
         provider:
           keycloak:
             issuer-uri: http://172.29.64.1:8082/realms/webstore
-  datasource:
-    url: jdbc:postgresql://172.29.64.1:5432/catalogue
-    username: catalogue
-    password: catalogue
-  flyway:
-    schemas:
-      - public
-      - catalogue
-  jpa:
-    show-sql: true
 logging:
   level:
     sql: info
@@ -65,9 +65,9 @@ management:
 # 100% собираемых трассировок. На практике так делать не нужно, от 10 до 40% нормальные значения (от 0.1 до 0.4)
 eureka:
   instance:
+    prefer-ip-address: true
     leaseRenewallIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 1
-    prefer-ip-address: true
   client:
     registerFetchIntervalSeconds: 1
     service-url:

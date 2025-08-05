@@ -8,6 +8,7 @@ spring:
         provider:
           keycloak:
             issuer-uri: http://172.29.64.1:8082/realms/webstore
+            user-name-attribute: preferred_username
         registration:
           keycloak:
             authorization-grant-type: client_credentials
